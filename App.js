@@ -6,31 +6,39 @@
  * @flow strict-local
  */
 
-import React, {Fragment, useEffect} from 'react';
-import {StatusBar, Platform} from 'react-native';
+import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {Provider} from 'react-redux';
-import {App} from './navigators/index';
-
+import {store} from './store';
 import {FormMasuk} from './src/screens/Autentikasi';
 import {FormPeminjaman} from './src/screens/Peminjaman';
 import {Dashboard} from './src/screens/Dashboard';
-import {store} from './store';
+import {Linimasa} from './src/screens/Linimasa';
 
-const Root = () => {
+
+const Stack = createStackNavigator();
+
+const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
   return (
-    // <Provider store={store}>
-    //   <App />
-    // </Provider>
-    <Fragment>
-      {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-      <Dashboard />
-    </Fragment>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="FormMasuk"
+          screenOptions={{headerShown: false}}>
+          <Stack.Screen name="FormMasuk" component={FormMasuk} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="FormPeminjaman" component={FormPeminjaman} />
+          <Stack.Screen name="Linimasa" component={Linimasa} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 
-export default Root;
+export default App;
