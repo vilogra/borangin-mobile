@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,19 +7,44 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {AuthContext} from '../../../components/context';
 import styles from './_formMasukStyle';
 const logoPolibatam = require('./../../../assets/images/logopolibatam.png');
 
 function FormMasuk() {
-  const [username, ubahUsername] = useState('');
-  const [password, ubahpassword] = useState('');
+  const [data, setData] = useState({
+    username: '',
+    password: '',
+    check_textInputChange: false,
+  });
 
-  const submitForm = () => {
-    if (!!username && !!password) {
-      alert(`Data berhasil di input dengan ${username}`);
+  const {signIn} = React.useContext(AuthContext);
+
+  const textInputChange = (val) => {
+    if (val.length != 0) {
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: true,
+      });
     } else {
-      alert('Username atau Password yang anda gunakan salah');
+      setData({
+        ...data,
+        username: val,
+        check_textInputChange: false,
+      });
     }
+  };
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password: val,
+    });
+  };
+
+  const handleLogin = (username, password) => {
+    signIn(username, password);
   };
 
   return (
@@ -39,18 +64,16 @@ function FormMasuk() {
             <View style={styles.wrapTextInput}>
               <TextInput
                 style={styles.inputWrapper}
-                onChangeText={ubahUsername}
+                onChangeText={(val) => textInputChange(val)}
                 placeholder="Masukkan username learning"
-                value={username}
                 autoCapitalize="none"
               />
             </View>
             <View style={styles.wrapTextInput}>
               <TextInput
                 style={styles.inputWrapper}
-                onChangeText={ubahpassword}
+                onChangeText={(val) => handlePasswordChange(val)}
                 placeholder="Masukkan password learning"
-                value={password}
                 autoCapitalize="none"
                 secureTextEntry
               />
@@ -66,7 +89,11 @@ function FormMasuk() {
               Lupa password
             </Text>
           </Text>
-          <TouchableOpacity onPress={submitForm} style={styles.buttonWrapper}>
+          <TouchableOpacity
+            onPress={() => {
+              handleLogin(data.username, data.password);
+            }}
+            style={styles.buttonWrapper}>
             <View>
               <Text style={styles.textHeader}>Masuk</Text>
             </View>
