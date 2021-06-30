@@ -11,7 +11,7 @@ import {
 import styles from './_formPeminjamanStyle';
 const arrowLeft = require('./assets/arrowLeft.png');
 
-function FormPeminjaman() {
+function FormPeminjaman({navigation}) {
   const [namaKegiatan, ubahNamaKegiatan] = useState('');
   const [namaPengaju, ubahNamaPengaju] = useState('');
   const [noHpPengaju, ubahNoHpPengaju] = useState('');
@@ -28,7 +28,7 @@ function FormPeminjaman() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View>
           <View style={styles.container}>
-            <TouchableOpacity onPress={() => alert('Kembali')}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image style={styles.arrow} source={arrowLeft} />
             </TouchableOpacity>
             <Text style={styles.textHeader}>Peminjaman</Text>
