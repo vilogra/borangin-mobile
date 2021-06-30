@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -11,7 +11,7 @@ import {AuthContext} from '../../../components/context';
 import styles from './_formMasukStyle';
 const logoPolibatam = require('./../../../assets/images/logopolibatam.png');
 
-function FormMasuk({navigation}) {
+function FormMasuk() {
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -45,14 +45,6 @@ function FormMasuk({navigation}) {
 
   const handleLogin = (username, password) => {
     signIn(username, password);
-  };
-
-  const submitForm = () => {
-    if (!!username && !!password) {
-      navigation.navigate('Dashboard');
-    } else {
-      alert('Username atau Password yang anda gunakan salah');
-    }
   };
 
   return (
