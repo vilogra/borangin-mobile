@@ -7,16 +7,19 @@
  */
 
 import React, {useEffect} from 'react';
+import {View, ActivityIndicator} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Provider} from 'react-redux';
-import {store} from './store';
+import {AuthContext} from './components/context';
+import axios from 'axios';
+import {TOKEN} from '@env';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {FormMasuk} from './src/screens/Autentikasi';
 import {FormPeminjaman} from './src/screens/Peminjaman';
 import {Dashboard} from './src/screens/Dashboard';
 import {Linimasa} from './src/screens/Linimasa';
-
 
 const Stack = createStackNavigator();
 
@@ -25,19 +28,130 @@ const App = () => {
     SplashScreen.hide();
   }, []);
 
+  const initialLoginState = {
+    isLoading: true,
+    username: null,
+    userToken: null,
+  };
+
+  const loginReducer = (prevState, action) => {
+    switch (action.type) {
+      case 'LOGIN':
+        return {
+          ...prevState,
+          username: action.id,
+          userToken: action.token,
+          isLoading: false,
+        };
+      case 'LOGOUT':
+        return {
+          ...prevState,
+          username: null,
+          userToken: null,
+          isLoading: false,
+        };
+    }
+  };
+
+  const [loginState, dispatch] = React.useReducer(
+    loginReducer,
+    initialLoginState,
+  );
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: (username, password) => {
+        const params = new FormData();
+        params.append('username', username);
+        params.append('password', password);
+        params.append('token', TOKEN);
+
+        axios
+          .post(
+            'http://sid.polibatam.ac.id/apilogin/web/api/auth/login',
+            params,
+            {
+              headers: {
+                'content-type': 'application/json',
+              },
+            },
+          )
+          .then(async (res) => {
+            if (res.data.status !== 'error') {
+              await AsyncStorage.setItem(
+                'userToken',
+                res.data.data.nim_nik_unit,
+              );
+              dispatch({
+                type: 'LOGIN',
+                id: res.data.data.id,
+                token: res.data.data.nim_nik_unit,
+                data: res.data.data,
+              });
+            } else {
+              alert('Username / Password salah');
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      signOut: async () => {
+        try {
+          await AsyncStorage.removeItem('userToken');
+        } catch (e) {
+          console.log(e);
+        }
+        dispatch({type: 'LOGOUT'});
+      },
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    setTimeout(async () => {
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem('userToken');
+      } catch (e) {
+        console.log(e);
+      }
+      dispatch({type: 'LOGIN'});
+    }, 1000);
+  }, []);
+
+  if (loginState.isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
-    <Provider store={store}>
+    <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="FormMasuk"
-          screenOptions={{headerShown: false}}>
-          <Stack.Screen name="FormMasuk" component={FormMasuk} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="FormPeminjaman" component={FormPeminjaman} />
-          <Stack.Screen name="Linimasa" component={Linimasa} />
-        </Stack.Navigator>
+        {loginState.userToken != null ? (
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="FormPeminjaman" component={FormPeminjaman} />
+            <Stack.Screen name="Linimasa" component={Linimasa} />
+          </Stack.Navigator>
+        ) : (
+          <Stack.Navigator
+            initialRouteName="FormMasuk"
+            screenOptions={{headerShown: false}}>
+            <Stack.Screen name="FormMasuk" component={FormMasuk} />
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
-    </Provider>
+    </AuthContext.Provider>
   );
 };
 
