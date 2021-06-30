@@ -20,6 +20,7 @@ import {FormMasuk} from './src/screens/Autentikasi';
 import {FormPeminjaman} from './src/screens/Peminjaman';
 import {Dashboard} from './src/screens/Dashboard';
 import {Linimasa} from './src/screens/Linimasa';
+import {MainNavigator} from './navigations/tabs';
 
 const Stack = createStackNavigator();
 
@@ -138,11 +139,7 @@ const App = () => {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {loginState.userToken != null ? (
-          <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Dashboard" component={Dashboard} />
-            <Stack.Screen name="FormPeminjaman" component={FormPeminjaman} />
-            <Stack.Screen name="Linimasa" component={Linimasa} />
-          </Stack.Navigator>
+          <MainNavigator />
         ) : (
           <Stack.Navigator
             initialRouteName="FormMasuk"
