@@ -2,6 +2,11 @@ import {StyleSheet} from 'react-native';
 import colors from '../../utils/constant/color';
 
 export default StyleSheet.create({
+  wrapper: {
+    flexDirection: 'column',
+    flex: 1,
+    width: '100%',
+  },
   container: {
     height: 40,
     paddingHorizontal: 8,
@@ -14,6 +19,7 @@ export default StyleSheet.create({
     color: colors.white,
     fontWeight: 'bold',
   },
+  bottomScrollViewContent: {marginBottom: '100%'},
   arrow: {width: 24, height: 24},
   headerWrapper: {
     height: 120,
@@ -28,7 +34,11 @@ export default StyleSheet.create({
   },
   bodyWrapper: {
     paddingTop: 40,
-    paddingHorizontal: 32,
+    paddingHorizontal: 20,
+  },
+  scrollView: {
+    width: '100%',
+    marginTop: '5%',
   },
   textTitle: {
     fontSize: 16,
