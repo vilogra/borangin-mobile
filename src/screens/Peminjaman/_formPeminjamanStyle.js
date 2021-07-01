@@ -4,14 +4,12 @@ import colors from '../../utils/constant/color';
 export default StyleSheet.create({
   safeAreaContainer: {
     flexGrow: 1,
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'space-between',
     marginBottom: 40,
   },
-  container: {
+  scrollContainer: {
     flex: 1,
+  },
+  container: {
     height: 40,
     paddingHorizontal: 8,
     backgroundColor: colors.P1,
@@ -25,7 +23,6 @@ export default StyleSheet.create({
   },
   arrow: {width: 24, height: 24},
   headerWrapper: {
-    flex: 1,
     height: 120,
     backgroundColor: colors.P2,
     paddingHorizontal: 32,
@@ -47,7 +44,6 @@ export default StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: colors.P4,
-    color: colors.P4,
     paddingHorizontal: 8,
   },
   labelInput: {
@@ -58,7 +54,6 @@ export default StyleSheet.create({
     paddingHorizontal: 32,
   },
   buttonWrapper: {
-    flex: 1,
     height: 40,
     backgroundColor: colors.P1,
     alignItems: 'center',

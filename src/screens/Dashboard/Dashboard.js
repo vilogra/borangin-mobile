@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, ScrollView, SafeAreaView, Text} from 'react-native';
 import PeraturanPeminjaman from './PeraturanPeminjaman';
 import styles from './_dashboardStyle';

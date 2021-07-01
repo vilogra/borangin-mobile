@@ -17,9 +17,6 @@ import {TOKEN} from '@env';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {FormMasuk} from './src/screens/Autentikasi';
-import {FormPeminjaman} from './src/screens/Peminjaman';
-import {Dashboard} from './src/screens/Dashboard';
-import {Linimasa} from './src/screens/Linimasa';
 import {MainNavigator} from './navigations/tabs';
 
 const Stack = createStackNavigator();
@@ -79,10 +76,10 @@ const App = () => {
           )
           .then(async (res) => {
             if (res.data.status !== 'error') {
-              await AsyncStorage.setItem(
-                'userToken',
-                res.data.data.nim_nik_unit,
-              );
+              await AsyncStorage.multiSet([
+                ['userToken', res.data.data.nim_nik_unit],
+                ['userData', JSON.stringify(res.data.data)],
+              ]);
               dispatch({
                 type: 'LOGIN',
                 id: res.data.data.id,
