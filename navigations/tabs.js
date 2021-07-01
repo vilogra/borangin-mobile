@@ -31,8 +31,7 @@ const CustomTabBarButton = ({children, onPress}) => (
 
 const Stack = createStackNavigator();
 
-const Tabs = ({navigation}) => {
-  const [isTabForm, setIsTabForm] = useState(true);
+const Tabs = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
