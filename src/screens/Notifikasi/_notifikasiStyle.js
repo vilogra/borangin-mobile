@@ -2,15 +2,7 @@ import {StyleSheet} from 'react-native';
 import colors from '../../utils/constant/color';
 
 export default StyleSheet.create({
-  safeAreaContainer: {
-    flex: 1,
-    marginBottom: 40,
-  },
-  wrapper: {
-    flexDirection: 'column',
-    flex: 1,
-    width: '100%',
-  },
+  safeAreaContainer: {flex: 1},
   container: {
     height: 40,
     paddingHorizontal: 8,
@@ -23,7 +15,6 @@ export default StyleSheet.create({
     color: colors.white,
     fontWeight: 'bold',
   },
-  bottomScrollViewContent: {marginBottom: '100%'},
   arrow: {width: 24, height: 24},
   headerWrapper: {
     height: 120,
@@ -36,23 +27,26 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-  bodyWrapper: {
-    paddingTop: 40,
-    paddingHorizontal: 20,
+  notificationWrapper: {
+    paddingVertical: 40,
+    paddingHorizontal: 32,
   },
-  scrollView: {
-    width: '100%',
-    marginTop: '5%',
+  notification: {
+    backgroundColor: '#EAF7EE',
+    borderWidth: 1,
+    borderColor: '#629161',
+    padding: 16,
+    marginBottom: 32,
   },
-  textTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  title: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingBottom: 8,
   },
-  textBody: {
-    paddingBottom: 16,
+  textTitle: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    paddingLeft: 8,
   },
-  textLink: {
-    color: '#15B4E7',
-  },
+  scrollView: {flex: 1, marginBottom: 20},
 });

@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Image, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Dashboard} from '../src/screens/Dashboard';
+import {Notifikasi} from '../src/screens/Notifikasi';
 import {FormPeminjaman} from '../src/screens/Peminjaman';
 import {Linimasa} from '../src/screens/Linimasa';
+import {Pengaturan} from '../src/screens/Pengaturan';
 import {createStackNavigator} from '@react-navigation/stack';
 import colors from '../src/utils/constant/color';
 
@@ -58,6 +60,20 @@ const Tabs = () => {
           ),
         }}></Tab.Screen>
       <Tab.Screen
+        name="notifikasi"
+        component={Notifikasi}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={{alignItems: 'center', top: 15}}>
+              <Image
+                source={require('./../assets/images/notification-alt.png')}
+                resizeMode="contain"
+                style={{width: 32, height: 32}}
+              />
+            </View>
+          ),
+        }}></Tab.Screen>
+      <Tab.Screen
         name="formPeminjaman"
         component={FormPeminjaman}
         options={{
@@ -85,6 +101,20 @@ const Tabs = () => {
             </View>
           ),
         }}></Tab.Screen>
+      <Tab.Screen
+        name="pengaturan"
+        component={Pengaturan}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <View style={{alignItems: 'center', top: 15}}>
+              <Image
+                source={require('./../assets/images/settings-alt.png')}
+                resizeMode="contain"
+                style={{width: 32, height: 32}}
+              />
+            </View>
+          ),
+        }}></Tab.Screen>
     </Tab.Navigator>
   );
 };
@@ -93,8 +123,10 @@ const MainNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}} mode="modal">
       <Stack.Screen name="Dashboard" component={Tabs} />
+      <Stack.Screen name="Notifikasi" component={Tabs} />
       <Stack.Screen name="FormPeminjaman" component={Tabs} />
       <Stack.Screen name="Linimasa" component={Tabs} />
+      <Stack.Screen name="Pengaturan" component={Tabs} />
     </Stack.Navigator>
   );
 };
