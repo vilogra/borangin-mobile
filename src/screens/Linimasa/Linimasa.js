@@ -33,11 +33,11 @@ function Linimasa() {
           <Card.Content>
             <View
               style={{
-                flexDirection: 'row',
+                flexDirection: 'column',
                 justifyContent: 'space-between',
-                alignItems: 'center',
               }}>
               <Text>{`${item.ruangan}, ${item.namaPengaju}`}</Text>
+              <Text>{`Pukul ${item.jamMulai} - ${item.jamSelesai}`}</Text>
             </View>
           </Card.Content>
         </Card>
@@ -66,6 +66,7 @@ function Linimasa() {
           selected={'2021-07-01'}
           renderItem={renderItem}
           renderEmptyData={renderEmptyDate}
+          refreshing={true}
         />
       </View>
     </SafeAreaView>

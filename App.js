@@ -96,7 +96,9 @@ const App = () => {
       },
       signOut: async () => {
         try {
-          await AsyncStorage.removeItem('userToken');
+          await AsyncStorage.multiRemove(['userToken', 'userData'], (err) => {
+            console.log(err);
+          });
         } catch (e) {
           console.log(e);
         }

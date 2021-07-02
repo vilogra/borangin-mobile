@@ -3,11 +3,13 @@ import colors from '../../utils/constant/color';
 
 export default StyleSheet.create({
   safeAreaContainer: {
-    flexGrow: 1,
+    flex: 1,
     marginBottom: 40,
   },
-  scrollContainer: {
+  wrapper: {
+    flexDirection: 'column',
     flex: 1,
+    width: '100%',
   },
   container: {
     height: 40,
@@ -58,5 +60,9 @@ export default StyleSheet.create({
     backgroundColor: colors.P1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrollView: {
+    width: '100%',
+    marginTop: '5%',
   },
 });
