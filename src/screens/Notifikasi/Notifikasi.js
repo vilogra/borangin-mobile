@@ -40,19 +40,21 @@ function Notifikasi() {
 
   return (
     <SafeAreaView style={styles.safeAreaContainer}>
-      <View style={styles.container}>
-        <View></View>
-        <Text style={styles.textHeader}>Notifikasi</Text>
-        <View style={styles.arrow}></View>
-      </View>
-      <View style={styles.headerWrapper}>
-        <Text style={styles.textSection}>Notifikasi</Text>
-      </View>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.notificationWrapper}>
-          {data.length !== 0 ? wrapData : noData}
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <View style={styles.container}>
+          <View></View>
+          <Text style={styles.textHeader}>Notifikasi</Text>
+          <View></View>
         </View>
-      </ScrollView>
+        <View style={styles.headerWrapper}>
+          <Text style={styles.textSection}>Notifikasi</Text>
+        </View>
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.notificationWrapper}>
+            {data.length !== 0 ? wrapData : noData}
+          </View>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

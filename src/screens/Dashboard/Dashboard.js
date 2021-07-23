@@ -10,7 +10,7 @@ function Dashboard() {
         <View style={styles.container}>
           <View />
           <Text style={styles.textHeader}>Beranda</Text>
-          <View style={styles.arrow} />
+          <View />
         </View>
         <View style={styles.headerWrapper}>
           <Text style={styles.textSection}>Borangin Polibatam</Text>

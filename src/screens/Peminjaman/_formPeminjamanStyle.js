@@ -5,6 +5,7 @@ export default StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
     marginBottom: 40,
+    backgroundColor: colors.P1,
   },
   wrapper: {
     flexDirection: 'column',

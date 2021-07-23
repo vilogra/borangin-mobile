@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import colors from '../../utils/constant/color';
 
 export default StyleSheet.create({
-  safeAreaContainer: {flex: 1},
+  safeAreaContainer: {flex: 1, backgroundColor: colors.P1},
   container: {
     height: 40,
     paddingHorizontal: 8,
