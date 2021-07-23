@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Agenda} from 'react-native-calendars';
 import {Card} from 'react-native-paper';
 import styles from './_linimasaStyle';
+import colors from '../../utils/constant/color';
 
 function Linimasa() {
   const [items, setItems] = useState({});
@@ -50,11 +51,11 @@ function Linimasa() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: colors.P1}}>
       <View style={styles.container}>
         <View></View>
         <Text style={styles.textHeader}>Linimasa</Text>
-        <View style={styles.arrow}></View>
+        <View></View>
       </View>
       <View style={styles.headerWrapper}>
         <Text style={styles.textSection}>Linimasa</Text>

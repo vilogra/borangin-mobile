@@ -5,11 +5,13 @@ export default StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
     marginBottom: 40,
+    backgroundColor: colors.P1,
   },
   wrapper: {
     flexDirection: 'column',
     flex: 1,
     width: '100%',
+    backgroundColor: 'white',
   },
   container: {
     height: 40,
@@ -38,7 +40,7 @@ export default StyleSheet.create({
   },
   bodyWrapper: {
     paddingTop: 40,
-    paddingHorizontal: 20,
+    paddingHorizontal: 32,
   },
   scrollView: {
     width: '100%',

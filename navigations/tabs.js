@@ -121,7 +121,7 @@ const Tabs = () => {
 
 const MainNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}} mode="modal">
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Dashboard" component={Tabs} />
       <Stack.Screen name="Notifikasi" component={Tabs} />
       <Stack.Screen name="FormPeminjaman" component={Tabs} />
