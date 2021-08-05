@@ -12,10 +12,11 @@ function Notifikasi() {
     const getAllData = async () => {
       const token = await AsyncStorage.getItem('userToken');
       axios
-        .get(`http://localhost:3000/borang?nim_nik_unit=${token}`)
+        // .get(`http://localhost:3004/borang?nim_nik_unit=${token}`)
+        .get(`https://peminjaman-ruangan-api.herokuapp.com/loans/user/${token}`)
         .then((res) => {
           if (res.data !== []) {
-            setData(res.data[0].request);
+            setData(res.data);
           } else {
             setData([]);
           }
@@ -29,7 +30,9 @@ function Notifikasi() {
   }, []);
 
   const wrapData = data.map((result) => {
-    return <Notification key={result.id} type={result.status} id={result.id} />;
+    return (
+      <Notification key={result._id} type={result.status} id={result._id} />
+    );
   });
 
   const noData = (
@@ -42,9 +45,9 @@ function Notifikasi() {
     <SafeAreaView style={styles.safeAreaContainer}>
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <View style={styles.container}>
-          <View></View>
+          <View />
           <Text style={styles.textHeader}>Notifikasi</Text>
-          <View></View>
+          <View />
         </View>
         <View style={styles.headerWrapper}>
           <Text style={styles.textSection}>Notifikasi</Text>

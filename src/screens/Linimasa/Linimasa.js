@@ -3,6 +3,8 @@ import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import axios from 'axios';
 import {Agenda} from 'react-native-calendars';
 import {Card} from 'react-native-paper';
+import moment from 'moment';
+import 'moment/locale/id';
 import styles from './_linimasaStyle';
 import colors from '../../utils/constant/color';
 
@@ -12,7 +14,7 @@ function Linimasa() {
   useEffect(() => {
     const getData = () => {
       axios
-        .get('http://localhost:3000/requests')
+        .get('https://peminjaman-ruangan-api.herokuapp.com/loans')
         .then(async (res) => {
           const data = await res.data;
           if (data) {
@@ -37,8 +39,21 @@ function Linimasa() {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}>
-              <Text>{`${item.ruangan}, ${item.namaPengaju}`}</Text>
-              <Text>{`Pukul ${item.jamMulai} - ${item.jamSelesai}`}</Text>
+              <Text>{`${item.ruangan}, ${item.namaPengajuRuangan}`}</Text>
+              <Text>{`Dari ${moment(item.tanggalMulaiKegiatan).format(
+                'dddd',
+              )}, ${moment(item.tanggalMulaiKegiatan).format(
+                'DD-MM-YYYY',
+              )}, ${moment(item.tanggalMulaiKegiatan)
+                .utcOffset(0)
+                .format('HH.mm')} WIB`}</Text>
+              <Text>{`Sampai ${moment(item.tanggalAkhirKegiatan).format(
+                'dddd',
+              )}, ${moment(item.tanggalAkhirKegiatan).format(
+                'DD-MM-YYYY',
+              )}, ${moment(item.tanggalAkhirKegiatan)
+                .utcOffset(0)
+                .format('HH.mm')} WIB`}</Text>
             </View>
           </Card.Content>
         </Card>
@@ -47,24 +62,24 @@ function Linimasa() {
   };
 
   const renderEmptyDate = () => {
-    return <View></View>;
+    return <View />;
   };
 
   return (
     <SafeAreaView style={{backgroundColor: colors.P1}}>
       <View style={styles.container}>
-        <View></View>
+        <View />
         <Text style={styles.textHeader}>Linimasa</Text>
-        <View></View>
+        <View />
       </View>
       <View style={styles.headerWrapper}>
         <Text style={styles.textSection}>Linimasa</Text>
       </View>
       <View style={{width: '100%', height: '100%'}}>
         <Agenda
-          minDate={new Date()}
+          // minDate={new Date()}
           items={items}
-          selected={'2021-07-01'}
+          selected={new Date()}
           renderItem={renderItem}
           renderEmptyData={renderEmptyDate}
           refreshing={true}

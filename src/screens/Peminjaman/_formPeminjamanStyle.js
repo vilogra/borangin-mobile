@@ -9,6 +9,7 @@ export default StyleSheet.create({
   },
   wrapper: {
     flexDirection: 'column',
+    backgroundColor: colors.white,
     flex: 1,
     width: '100%',
   },
@@ -48,6 +49,13 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.P4,
     paddingHorizontal: 8,
+  },
+  textWrapper: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: colors.P4,
+    paddingHorizontal: 8,
+    justifyContent: 'center',
   },
   labelInput: {
     color: colors.P3,
