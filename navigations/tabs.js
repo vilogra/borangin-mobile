@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, TouchableOpacity} from 'react-native';
+import {View, Image, TouchableOpacity, Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Dashboard} from '../src/screens/Dashboard';
@@ -50,7 +50,12 @@ const Tabs = () => {
         component={Dashboard}
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center', top: 15}}>
+            <View
+              style={
+                Platform.OS === 'android'
+                  ? {alignItems: 'center', top: 0}
+                  : {alignItems: 'center', top: 15}
+              }>
               <Image
                 source={require('./../assets/images/home-alt.png')}
                 resizeMode="contain"
@@ -58,13 +63,19 @@ const Tabs = () => {
               />
             </View>
           ),
-        }}></Tab.Screen>
+        }}
+      />
       <Tab.Screen
         name="notifikasi"
         component={Notifikasi}
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center', top: 15}}>
+            <View
+              style={
+                Platform.OS === 'android'
+                  ? {alignItems: 'center', top: 0}
+                  : {alignItems: 'center', top: 15}
+              }>
               <Image
                 source={require('./../assets/images/notification-alt.png')}
                 resizeMode="contain"
@@ -72,7 +83,8 @@ const Tabs = () => {
               />
             </View>
           ),
-        }}></Tab.Screen>
+        }}
+      />
       <Tab.Screen
         name="formPeminjaman"
         component={FormPeminjaman}
@@ -86,13 +98,19 @@ const Tabs = () => {
           ),
           tabBarButton: (props) => <CustomTabBarButton {...props} />,
           tabBarVisible: false,
-        }}></Tab.Screen>
+        }}
+      />
       <Tab.Screen
         name="linimasa"
         component={Linimasa}
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center', top: 15}}>
+            <View
+              style={
+                Platform.OS === 'android'
+                  ? {alignItems: 'center', top: 0}
+                  : {alignItems: 'center', top: 15}
+              }>
               <Image
                 source={require('./../assets/images/date-question.png')}
                 resizeMode="contain"
@@ -100,13 +118,19 @@ const Tabs = () => {
               />
             </View>
           ),
-        }}></Tab.Screen>
+        }}
+      />
       <Tab.Screen
         name="pengaturan"
         component={Pengaturan}
         options={{
           tabBarIcon: ({focused}) => (
-            <View style={{alignItems: 'center', top: 15}}>
+            <View
+              style={
+                Platform.OS === 'android'
+                  ? {alignItems: 'center', top: 0}
+                  : {alignItems: 'center', top: 15}
+              }>
               <Image
                 source={require('./../assets/images/settings-alt.png')}
                 resizeMode="contain"
@@ -114,7 +138,8 @@ const Tabs = () => {
               />
             </View>
           ),
-        }}></Tab.Screen>
+        }}
+      />
     </Tab.Navigator>
   );
 };
