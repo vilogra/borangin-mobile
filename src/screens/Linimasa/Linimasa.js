@@ -29,6 +29,17 @@ function Linimasa() {
     getData();
   }, []);
 
+  const statusType = (type) => {
+    switch (type) {
+      case 'succeed':
+        return <Text>Status: Diterima</Text>;
+      case 'rejected':
+        return <Text>Status: Ditolak</Text>;
+      default:
+        return <Text>Status: Diproses</Text>;
+    }
+  };
+
   const renderItem = (item) => {
     return (
       <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
@@ -54,6 +65,7 @@ function Linimasa() {
               )}, ${moment(item.tanggalAkhirKegiatan)
                 .utcOffset(0)
                 .format('HH.mm')} WIB`}</Text>
+              <Text>{statusType(item.status)}</Text>
             </View>
           </Card.Content>
         </Card>

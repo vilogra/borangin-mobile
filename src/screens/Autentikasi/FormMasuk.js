@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {AuthContext} from '../../../components/context';
 import styles from './_formMasukStyle';
@@ -85,7 +86,11 @@ function FormMasuk() {
             Tidak bisa login?{' '}
             <Text
               style={styles.underlineText}
-              onPress={() => alert('Lupa password clicked')}>
+              onPress={() =>
+                Linking.openURL(
+                  'https://learning-if.polibatam.ac.id/login/forgot_password.php',
+                )
+              }>
               Lupa password
             </Text>
           </Text>
